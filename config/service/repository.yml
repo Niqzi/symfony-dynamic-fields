@@ -1,0 +1,13 @@
+services:
+    
+    project.repository:
+        class: App\Repository\ProjectRepository
+        public: true
+        factory: ["@doctrine", getRepository]
+        arguments: [ App:Project ]
+        
+    task.repository:
+        class: App\Repository\TaskRepository
+        public: true
+        factory: ["@doctrine", getRepository]
+        arguments: [ App:Task ]    

@@ -1,0 +1,19 @@
+admin_project_list:
+    path: /
+    controller: App\Controller\ProjectController::index
+    
+admin_project_create:
+    path: /create
+    controller: App\Controller\ProjectController:create
+    
+admin_project_edit:
+    path: /{id}/edit
+    controller: App\Controller\ProjectController::edit
+
+admin_project_delete:
+    path: /{id}/delete
+    controller: App\Controller\ProjectController::delete
+    
+admin_poject_api_point:
+    path: /api
+    controller: App\Controller\ProjectController::apiPoint

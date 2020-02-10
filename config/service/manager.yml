@@ -1,0 +1,11 @@
+services:
+    
+    admin.project.manager:
+        class: App\Manager\Admin\Project
+        public: true
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@project.repository"
+        calls:
+            - [setFlashbag, ["@session.flash_bag"]]
+            - [setFormFactory, ["@form.factory"]]       

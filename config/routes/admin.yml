@@ -1,0 +1,3 @@
+_admin_project:
+    resource: admin/project.yml
+    prefix: /projects

@@ -1,0 +1,63 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+    <h2>Create project and tasks</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.save) }}
+    <div id="wrapper" data-index="{{ form.tasks|length }}" data-prototype="{{ form_widget(form.tasks.vars.prototype)|e('html_attr') }}"></div>
+    <button type="button" id="add-task" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i> add task/s</button>
+    <table id="tasks" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in  form.tasks %}
+                <tr>
+                    <td>{{ form_widget(task.date) }}</td>
+                    <td>{{ form_widget(task.description) }}</td>
+                    <td>{{ form_widget(task.status) }}</td>
+                    <td><button type="button" title="Click for remove" class="remove-task btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block _project_tasks_entry_widget %}
+    <tr>
+        <td>{{ form_widget(form.date) }}</td>
+        <td>{{ form_widget(form.description) }}</td>
+        <td>{{ form_widget(form.status) }}</td>
+        <td><button type="button" title="Click fo remove" class="remove-task btn btn-danger"><i class="fa fa-trash"></i></button></td>
+    </tr>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function () {
+            var $wrapper = $('#wrapper');
+            $('#add-task').click(function () {
+                var prototype = $wrapper.data('prototype');
+                var index = $wrapper.data('index');
+                var newForm = prototype.replace(/__name__/g, index);
+                $wrapper.data('index', index + 1);
+                $('#tasks tr:last').after(newForm);
+            });
+
+            $('#tasks').on('click', '.remove-task', function () {
+                $(this).closest('tr').remove();
+            });
+
+        });
+    </script>
+{% endblock %}   

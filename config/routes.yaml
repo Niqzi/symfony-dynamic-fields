@@ -1,0 +1,3 @@
+_admin:
+    resource: routes/admin.yml
+    prefix: /admin
