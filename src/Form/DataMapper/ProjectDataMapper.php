@@ -53,9 +53,7 @@ class ProjectDataMapper implements DataMapperInterface
                 }
             }
             
-            if($viewData->getTasks()->count() !== $forms['tasks']->getData()->count()){
-                $viewData->removeTasks($ids);
-            }
+        $viewData->removeTasks($ids);
     }
     
     public function configureOptions(OptionsResolver $resolver)
